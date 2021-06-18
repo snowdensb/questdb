@@ -3990,6 +3990,11 @@ public class IODispatcherTest {
                 public long getQueuedConnectionTimeout() {
                     return 300_000;
                 }
+
+                @Override
+                public boolean getPeerNoLinger() {
+                    return true;
+                }
             };
 
             try (IODispatcher<HttpConnectionContext> dispatcher = IODispatchers.create(
