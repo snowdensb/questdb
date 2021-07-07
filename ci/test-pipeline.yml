@@ -43,34 +43,32 @@ stages:
         dependsOn: CheckChanges
         strategy:
           matrix:
-            microsofthosted:
-              linux:
-                imageName: "ubuntu-latest"
-                poolName: "Azure Pipelines"
-                os: Linux
-                jdk: "1.11"
-              mac:
-                imageName: "macos-latest"
-                poolName: "Azure Pipelines"
-                os: macOS
-                jdk: "1.11"
-              windows:
-                imageName: "windows-latest"
-                poolName: "Azure Pipelines"
-                os: Windows
-                jdk: "1.11"
-              linux-jdk8:
-                imageName: "ubuntu-latest"
-                poolName: "Azure Pipelines"
-                os: Linux
-                jdk: "1.8"
+            linux:
+              imageName: "ubuntu-latest"
+              poolName: "Azure Pipelines"
+              os: Linux
+              jdk: "1.11"
+            mac:
+              imageName: "macos-latest"
+              poolName: "Azure Pipelines"
+              os: macOS
+              jdk: "1.11"
+            windows:
+              imageName: "windows-latest"
+              poolName: "Azure Pipelines"
+              os: Windows
+              jdk: "1.11"
+            linux-jdk8:
+              imageName: "ubuntu-latest"
+              poolName: "Azure Pipelines"
+              os: Linux
+              jdk: "1.8"
             
-            selfhosted:
-              linux-arm64:
-                imageName:
-                poolName: "arm64"
-                os: Linux
-                jdk: "1.11"
+            linux-arm64:
+              imageName:
+              poolName: "arm64"
+              os: Linux
+              jdk: "1.11"
         pool:
           name: $(poolName)
           vmImage: $(imageName)
