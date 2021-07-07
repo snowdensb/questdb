@@ -48,32 +48,27 @@ stages:
               poolName: "Azure Pipelines"
               os: Linux
               jdk: "1.11"
-              jdkArch: "x64"
             mac:
               imageName: "macos-latest"
               poolName: "Azure Pipelines"
               os: macOS
               jdk: "1.11"
-              jdkArch: "x64"
             windows:
               imageName: "windows-latest"
               poolName: "Azure Pipelines"
               os: Windows
               jdk: "1.11"
-              jdkArch: "x64"
             linux-jdk8:
               imageName: "ubuntu-latest"
               poolName: "Azure Pipelines"
               os: Linux
               jdk: "1.8"
-              jdkArch: "x64"
             
             linux-arm64:
               imageName:
               poolName: "arm64"
               os: Linux
               jdk: "1.11"
-              jdkArch: "arm64"
         pool:
           name: $(poolName)
           vmImage: $(imageName)
@@ -102,7 +97,6 @@ stages:
               mavenOptions: "-Xmx3072m"
               options: "compile -DskipTests -P build-web-console,use-built-in-nodejs -Dhttp.keepAlive=false"
               jdkVersionOption: $(jdk)
-              jdkArchitectureOption: $(jdkArch)
             condition: eq(variables['SOURCE_CODE_CHANGED'], 'false')
           - task: Maven@3
             displayName: "Run tests with Maven with Code Coverage"
@@ -111,7 +105,6 @@ stages:
               mavenOptions: "-Xmx3072m"
               options: "--batch-mode --quiet -P build-web-console,use-built-in-nodejs -Dout=$(Build.SourcesDirectory)/ci/qlog.conf -Dhttp.keepAlive=false"
               jdkVersionOption: $(jdk)
-              jdkArchitectureOption: $(jdkArch)
               codeCoverageToolOption: "$(CODE_COVERAGE_TOOL_OPTION)"
               codeCoverageClassFilter: "$(COVERAGE_DIFF)"
             timeoutInMinutes: 55
@@ -130,7 +123,6 @@ stages:
               mavenOptions: "-Xmx3072m"
               options: "--batch-mode --quiet -P build-web-console,use-built-in-nodejs -Dout=$(Build.SourcesDirectory)/ci/qlog.conf -Dhttp.keepAlive=false"
               jdkVersionOption: $(jdk)
-              jdkArchitectureOption: $(jdkArch)
             timeoutInMinutes: 55
             condition: |
               and(
