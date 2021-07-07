@@ -1,9 +1,9 @@
 trigger: none
 
-pr:
-  branches:
-    include:
-      - master
+# pr:
+#   branches:
+#     include:
+#       - master
 
 variables:
   QDB_LOG_W_FILE_LOCATION: "$(Build.BinariesDirectory)/tests.log"
@@ -43,23 +43,36 @@ stages:
         dependsOn: CheckChanges
         strategy:
           matrix:
-            linux:
-              imageName: "ubuntu-latest"
-              os: Linux
-              jdk: "1.11"
-            mac:
-              imageName: "macos-latest"
-              os: macOS
-              jdk: "1.11"
-            windows:
-              imageName: "windows-latest"
-              os: Windows
-              jdk: "1.11"
-            linux-jdk8:
-              imageName: "ubuntu-latest"
-              os: Linux
-              jdk: "1.8"
+            microsofthosted:
+              linux:
+                imageName: "ubuntu-latest"
+                poolName: "Azure Pipelines"
+                os: Linux
+                jdk: "1.11"
+              mac:
+                imageName: "macos-latest"
+                poolName: "Azure Pipelines"
+                os: macOS
+                jdk: "1.11"
+              windows:
+                imageName: "windows-latest"
+                poolName: "Azure Pipelines"
+                os: Windows
+                jdk: "1.11"
+              linux-jdk8:
+                imageName: "ubuntu-latest"
+                poolName: "Azure Pipelines"
+                os: Linux
+                jdk: "1.8"
+            
+            selfhosted:
+              linux-arm64:
+                imageName:
+                poolName: "arm64"
+                os: Linux
+                jdk: "1.11"
         pool:
+          name: $(poolName)
           vmImage: $(imageName)
         timeoutInMinutes: 60
         variables:
@@ -149,9 +162,9 @@ stages:
               includeRootFolder: false
               archiveFile: $(ARCHIVED_LOGS)
               quiet: true
-          - task: PublishBuildArtifacts@1
-            displayName: "Tests failed -- Upload logs"
-            condition: not(succeeded())
-            inputs:
-              pathToPublish: $(ARCHIVED_LOGS)
-              artifactName: MavenFailedTestsLogs
+          # - task: PublishBuildArtifacts@1
+          #   displayName: "Tests failed -- Upload logs"
+          #   condition: not(succeeded())
+          #   inputs:
+          #     pathToPublish: $(ARCHIVED_LOGS)
+          #     artifactName: MavenFailedTestsLogs
