@@ -68,7 +68,7 @@ stages:
               imageName:
               poolName: "arm64"
               os: Linux
-              jdk: "1.11"
+              #jdk: "1.11"
         pool:
           name: $(poolName)
           vmImage: $(imageName)
