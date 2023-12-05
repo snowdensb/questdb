@@ -67,7 +67,7 @@
     "@babel/preset-react": "7.10.1",
     "@babel/preset-typescript": "7.10.1",
     "@typescript-eslint/eslint-plugin": "4.15.1",
-    "@typescript-eslint/parser": "4.15.1",
+    "@typescript-eslint/parser": "6.1.0",
     "archiver": "4.0.1",
     "babel-loader": "8.1.0",
     "babel-plugin-styled-components": "1.10.7",
